@@ -1,0 +1,33 @@
+version: '2'
+services:
+  ng:
+    ports:
+      - "4200:4200"
+    build:
+      context: ./services/patternstack-ng
+      dockerfile: Dockerfile
+    entrypoint: "npm run serve:docker"
+    volumes:
+      - ./services/patternstack-ng/src:/usr/src/app/src
+  api:
+    environment:
+      - PORT=8080
+    ports:
+      - "3000:8080"
+    build:
+      context: ./services/patternstack-node
+      dockerfile: Dockerfile
+    entrypoint: "npm run serve:dev"
+    volumes:
+      - ./services/patternstack-node/lib:/usr/src/app/lib
+      - ./services/patternstack-node/public:/usr/src/app/public
+  swagger-ui:
+    environment:
+      - API_URL=http://localhost:3000/apidoc/swagger.yml
+    ports:
+      - "8080:8080"
+    image: "swaggerapi/swagger-ui"
+  swagger-editor:
+    ports:
+      - "8081:8080"
+    image: "swaggerapi/swagger-editor"

@@ -1,0 +1,14 @@
+{
+  "name": "patternstack-cluster",
+  "version": "0.0.1",
+  "description": "A patternstack cluster",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "clone": "./scripts/services.sh clone",
+    "pull": "./scripts/services.sh pull"
+  },
+  "postinstall": "scripts/services.sh clone",
+  "author": "bleathem@redhat.com",
+  "license": "Apache-2.0",
+}
